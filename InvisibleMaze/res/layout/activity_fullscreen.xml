@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/maze"
     tools:context="com.cs252.invisiblemaze.FullscreenActivity" >
 
     <!--
@@ -16,11 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:keepScreenOn="true" />
 
     <!--
          This FrameLayout insets its children based on system windows using
@@ -32,24 +28,41 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true" >
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent" >
-
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            
             <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
+                android:id="@+id/play_button"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dummy_button" />
-        </LinearLayout>
+                android:text="@string/play_button"
+                android:textColor="#FFD700" />
+            
+            <TextView android:id="@+id/title_text"
+                android:layout_centerHorizontal="true"
+    			android:layout_above="@id/play_button"
+              	android:layout_width="wrap_content"
+              	android:layout_height="wrap_content"
+              	android:text="@string/title"
+              	android:gravity="center"
+              	android:textColor="#FFD700"
+              	android:textSize="32sp"
+              	android:textStyle="bold" />
+            
+            <Button
+                android:id="@+id/scores_button"
+                android:layout_centerHorizontal="true"
+    			android:layout_below="@id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scores_button"
+                android:textColor="#FFD700" />
+            
+        </RelativeLayout>
     </FrameLayout>
 
 </FrameLayout>
