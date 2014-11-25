@@ -5,5 +5,8 @@
     <string name="play_button">Play</string>
     <string name="scores_button">High Scores</string>
     <string name="title">Invisible Maze</string>
+    <string name="title_activity_gameplay">GameplayActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

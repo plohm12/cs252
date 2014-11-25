@@ -1659,6 +1659,7 @@ containing a value of this type.
         public static final int dialog=0x7f050010;
         public static final int disableHome=0x7f05000a;
         public static final int dropdown=0x7f050011;
+        public static final int dummy_button=0x7f050044;
         public static final int edit_query=0x7f050033;
         public static final int end=0x7f050014;
         public static final int expand_activities_button=0x7f050022;
@@ -1755,7 +1756,8 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030015;
         public static final int abc_simple_dropdown_hint=0x7f030016;
         public static final int activity_fullscreen=0x7f030017;
-        public static final int support_simple_spinner_dropdown_item=0x7f030018;
+        public static final int activity_gameplay=0x7f030018;
+        public static final int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1815,9 +1817,12 @@ containing a value of this type.
          */
         public static final int abc_toolbar_collapse_description=0x7f0a0004;
         public static final int app_name=0x7f0a0010;
+        public static final int dummy_button=0x7f0a0015;
+        public static final int dummy_content=0x7f0a0016;
         public static final int play_button=0x7f0a0011;
         public static final int scores_button=0x7f0a0012;
         public static final int title=0x7f0a0013;
+        public static final int title_activity_gameplay=0x7f0a0014;
     }
     public static final class style {
         /** 
