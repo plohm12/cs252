@@ -1,15 +1,27 @@
 package com.cs252.invisiblemaze;
 
+import java.util.Random;
+
 import com.cs252.invisiblemaze.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-
+import android.widget.EditText;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.Builder;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.multiplayer.Invitation;
+import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
+import com.google.android.gms.games.multiplayer.turnbased.OnTurnBasedMatchUpdateReceivedListener;
+import com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatch;
+import com.google.android.gms.plus.Plus;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -17,11 +29,14 @@ import android.view.View;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity {
+public class FullscreenActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+OnInvitationReceivedListener, OnTurnBasedMatchUpdateReceivedListener,
+View.OnClickListener{
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
+	public final static String EXTRA = "com.cs252.invisiblemaze.MESSAGE";
     private static final boolean AUTO_HIDE = true;
 
     /**
@@ -45,6 +60,7 @@ public class FullscreenActivity extends Activity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +114,15 @@ public class FullscreenActivity extends Activity {
                 }
             }
         });
-
+        
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        	.addConnectionCallbacks(this)
+        	.addOnConnectionFailedListener(this)
+        	.addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
+        	.addApi(Games.API).addScope(Games.SCOPE_GAMES)
+        	.build();
+        
+      //  findViewById(R.id.
     }
 
     @Override
@@ -143,4 +167,72 @@ public class FullscreenActivity extends Activity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+    public void startMaze(View view){
+    	Intent intent = new Intent(this, GameplayActivity.class);
+    	/*EditText edit = (EditText) findViewById(R.id.);
+    	String message = edit.getText().toString();
+    	if(edit.getText().equals("")){
+    		Random r = new Random();
+    		int x = r.nextInt(10000);
+    		StringBuilder user = new StringBuilder();
+    		user.append("user");
+    		user.append(x);
+    		message = user.toString();
+    		
+    		
+    		
+    	}
+    	
+    
+    	intent.putExtra(EXTRA, message);
+    	*/
+    	startActivity(intent);
+    }
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnected(Bundle connectionHint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnectionSuspended(int cause) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnBasedMatchReceived(TurnBasedMatch match) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTurnBasedMatchRemoved(String matchId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onInvitationReceived(Invitation invitation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onInvitationRemoved(String invitationId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

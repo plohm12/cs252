@@ -4,6 +4,7 @@ import com.cs252.invisiblemaze.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -122,7 +123,10 @@ public class GameplayActivity extends Activity {
 				mDelayHideTouchListener);
 		
 		// BEGIN OUR CODE
-		String message = "Hello WORLD";
+		//String message = "Hello WORLD";
+		Intent intent = getIntent();
+		String message = intent.getStringExtra(FullscreenActivity.EXTRA);
+		
 		TextView textView = new TextView(this);
 		textView.setTextSize(40);
 		textView.setText(message);
