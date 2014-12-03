@@ -1,6 +1,9 @@
 package com.cs252.invisiblemaze;
 
 import com.cs252.invisiblemaze.util.SystemUiHider;
+import com.shephertz.app42.gaming.multiplayer.client.WarpClient;
+import com.shephertz.app42.gaming.multiplayer.client.events.ConnectEvent;
+import com.shephertz.app42.gaming.multiplayer.client.listener.ConnectionRequestListener;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,14 +20,15 @@ import android.view.View;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity { 
+public class FullscreenActivity extends Activity implements ConnectionRequestListener { 
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
 	public final static String EXTRA = "com.cs252.invisiblemaze.MESSAGE";
     private static final boolean AUTO_HIDE = true;
-
+    public final static String key = "70cdb59acf7725d48640e604c6669f60a569a0afc4fa4594505739871feb3be3";
+    public final static String secertKey = "b92e693527af2b42f0c49d571f10211d04225fadfba199f293bbf23dd238ffb0";
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
@@ -46,6 +50,9 @@ public class FullscreenActivity extends Activity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+    
+    private WarpClient theClient;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +106,23 @@ public class FullscreenActivity extends Activity {
                 }
             }
         });
+        init();
     }
 
-    @Override
+    private void init() {
+		// TODO Auto-generated method stub
+		WarpClient.initialize(key,secertKey);
+		try{
+			theClient = WarpClient.getInstance();
+		}catch(Exception e){
+			System.out.println("error\n");
+			
+		}
+		theClient.addConnectionRequestListener(this);
+		
+	}
+
+	@Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
@@ -144,8 +165,29 @@ public class FullscreenActivity extends Activity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
     public void startMaze(View view){
+    	String userName = "Charles";
+    	theClient.connectWithUserName(userName);
+    	
     	Intent intent = new Intent(this, GameplayActivity.class);
     	startActivity(intent);
     }
+
+	@Override
+	public void onConnectDone(ConnectEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisconnectDone(ConnectEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onInitUDPDone(byte arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
