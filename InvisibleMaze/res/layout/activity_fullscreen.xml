@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true" >
 
-        <RelativeLayout
+       <RelativeLayout
             android:id="@+id/fullscreen_content_controls"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -43,9 +43,16 @@
                 android:onClick="startMaze"
                 android:textColor="#FFD700" />
             
+         	<EditText android:id="@+id/user_name"
+         	    android:layout_centerHorizontal="true"
+       		    android:layout_above="@id/play_button"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:hint="@string/enter_user_name" />
+            
             <TextView android:id="@+id/title_text"
                 android:layout_centerHorizontal="true"
-    			android:layout_above="@id/play_button"
+    			android:layout_above="@id/user_name"
               	android:layout_width="wrap_content"
               	android:layout_height="wrap_content"
               	android:text="@string/title"

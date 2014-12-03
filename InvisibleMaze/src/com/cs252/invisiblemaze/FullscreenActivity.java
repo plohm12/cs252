@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -164,11 +165,15 @@ public class FullscreenActivity extends Activity implements ConnectionRequestLis
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+    
     public void startMaze(View view){
     	String userName = "Charles";
     	theClient.connectWithUserName(userName);
     	
     	Intent intent = new Intent(this, GameplayActivity.class);
+    	EditText editText = (EditText) findViewById(R.id.user_name);
+    	String message = editText.getText().toString();
+    	intent.putExtra(EXTRA, message);
     	startActivity(intent);
     }
 
