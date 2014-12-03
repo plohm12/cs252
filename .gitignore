@@ -1,0 +1,6 @@
+InvisibleMaze/bin/*
+appcompat_v7/bin/*
+.metadata/
+*.class
+InvisibleMaze/gen/*
+appcompat_v7/gen/*
