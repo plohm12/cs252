@@ -219,8 +219,17 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	public void init(){
 		FullscreenActivity.theClient.addRoomRequestListener(this);
 		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
+		
 		if(Constants.isLocalPalyer){
 			turnText.setText(Constants.localUsername);
+			System.out.println(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat(Constants.localUsername);
+
+		}
+		else if(!Constants.isLocalPalyer){
+			System.out.println("I joined!");
+			FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			
 		}
 	}
 	@Override
