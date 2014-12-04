@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Invisible Maze</string>
-    <string name="play_button" translatable="false">Play</string>
-    <string name="scores_button" translatable="false">High Scores</string>
-    <string name="title" translatable="false">Invisible Maze</string>
-    <string name="title_activity_gameplay" translatable="false">GameplayActivity</string>
-    <string name="dummy_button" translatable="false">Dummy Button</string>
-    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
+    <string name="app_name">Invisible Maze</string>
+    <string name="play_button">Play</string>
+    <string name="scores_button">High Scores</string>
+    <string name="title">Invisible Maze</string>
+    <string name="title_activity_gameplay">GameplayActivity</string>
+    <string name="enter_user_name">Enter Username</string>
 
 </resources>

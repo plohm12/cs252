@@ -1,6 +1,9 @@
 package com.cs252.invisiblemaze;
 
 import com.cs252.invisiblemaze.util.SystemUiHider;
+import com.shephertz.app42.gaming.multiplayer.client.events.LiveRoomInfoEvent;
+import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
+import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListener;
 
 //import android.R;
 
@@ -12,6 +15,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 /**
@@ -20,7 +24,7 @@ import android.support.v4.app.NavUtils;
  * 
  * @see SystemUiHider
  */
-public class GameplayActivity extends Activity {
+public class GameplayActivity extends Activity implements RoomRequestListener{
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -48,6 +52,8 @@ public class GameplayActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+
+	private TextView turnText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +122,9 @@ public class GameplayActivity extends Activity {
 				}
 			}
 		});
+		 turnText = new TextView(this);
+		init();
+		setContentView(turnText);
 		
 		setContentView(new GameboardView(this));
 
@@ -206,5 +215,81 @@ public class GameplayActivity extends Activity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+	}
+	public void init(){
+		FullscreenActivity.theClient.addRoomRequestListener(this);
+		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
+		
+		if (Constants.isLocalPalyer){
+			turnText.setText(Constants.localUsername);
+			System.out.println(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat("I JOINED!");
+
+		}
+		else if (!Constants.isLocalPalyer){
+			System.out.println(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			
+		}
+	}
+	@Override
+	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
+		// TODO Auto-generated method stub
+		int users = arg0.getJoinedUsers().length;
+		String[] users2 = arg0.getJoinedUsers();
+		for (String user : users2)
+			System.out.println(user);
+		if(users>1){
+			FullscreenActivity.theClient.startGame();
+			
+		}
+	}
+
+	@Override
+	public void onJoinRoomDone(RoomEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLeaveRoomDone(RoomEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLockPropertiesDone(byte arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSetCustomRoomDataDone(LiveRoomInfoEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSubscribeRoomDone(RoomEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUnSubscribeRoomDone(RoomEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUnlockPropertiesDone(byte arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUpdatePropertyDone(LiveRoomInfoEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
