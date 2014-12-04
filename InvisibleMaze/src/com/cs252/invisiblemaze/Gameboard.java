@@ -1,7 +1,6 @@
 package com.cs252.invisiblemaze;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Gameboard {
