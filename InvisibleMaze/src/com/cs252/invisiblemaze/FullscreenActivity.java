@@ -48,7 +48,6 @@ import android.widget.EditText;
 	private FindRoom rf = new FindRoom();
     private ProgressDialog progressDialog;
 
-
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
 	 * user interaction before hiding the system UI.
