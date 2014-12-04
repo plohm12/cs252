@@ -209,9 +209,10 @@ import android.widget.EditText;
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				progressDialog.dismiss();
+			//	progressDialog.dismiss();
 				if(suc){
 					Intent myIntent = new Intent(FullscreenActivity.this, GameplayActivity.class);
+					startActivity(myIntent);
 					
 				}
 			}
