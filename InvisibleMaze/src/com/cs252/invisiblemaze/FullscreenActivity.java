@@ -99,6 +99,10 @@ public class FullscreenActivity extends Activity {
                 }
             }
         });
+        
+        //PAUL'S DEBUG CODE
+        Gameboard g = new Gameboard(6);
+        g.makePath();
     }
 
     @Override
