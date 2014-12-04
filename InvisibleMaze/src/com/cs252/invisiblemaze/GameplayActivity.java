@@ -220,14 +220,14 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		FullscreenActivity.theClient.addRoomRequestListener(this);
 		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
 		
-		if(Constants.isLocalPalyer){
+		if (Constants.isLocalPalyer){
 			turnText.setText(Constants.localUsername);
 			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat("I JOINED!");
 
 		}
-		else if(!Constants.isLocalPalyer){
-			System.out.println("I joined!");
+		else if (!Constants.isLocalPalyer){
+			System.out.println(Constants.localUsername);
 			FullscreenActivity.theClient.sendChat(Constants.localUsername);
 			
 		}
@@ -236,6 +236,9 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
 		int users = arg0.getJoinedUsers().length;
+		String[] users2 = arg0.getJoinedUsers();
+		for (String user : users2)
+			System.out.println(user);
 		if(users>1){
 			FullscreenActivity.theClient.startGame();
 			
