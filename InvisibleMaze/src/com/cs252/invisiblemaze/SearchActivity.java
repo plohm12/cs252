@@ -1,11 +1,6 @@
 package com.cs252.invisiblemaze;
 
 import com.cs252.invisiblemaze.util.SystemUiHider;
-import com.shephertz.app42.gaming.multiplayer.client.events.LiveRoomInfoEvent;
-import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
-import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListener;
-
-//import android.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -14,9 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.support.v4.app.NavUtils;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -24,7 +16,7 @@ import android.support.v4.app.NavUtils;
  * 
  * @see SystemUiHider
  */
-public class GameplayActivity extends Activity implements RoomRequestListener{
+public class SearchActivity extends Activity {
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -53,15 +45,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	 */
 	private SystemUiHider mSystemUiHider;
 
-	private TextView turnText;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_gameplay);
-		setupActionBar();
-		
+		setContentView(R.layout.activity_search);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -122,35 +110,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 				}
 			}
 		});
+	}
 
-		init();
-		setContentView(new GameboardView(this));
-	}
-	
-	public void onStart(){
-		super.onStart();
-		FullscreenActivity.theClient.addRoomRequestListener(this);
-		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		
-		if (Constants.isLocalPlayer){
-			turnText.setText(Constants.localUsername);
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat("I JOINED!");
-
-		}
-		else if (!Constants.isLocalPlayer){
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat(Constants.localUsername);
-			
-		}
-	}
-	
-	public void onStop() {
-		super.onStop();
-		this.finish();
-		FullscreenActivity.theClient.removeRoomRequestListener(this);
-	}
-	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -159,36 +120,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		// created, to briefly hint to the user that UI controls
 		// are available.
 		delayedHide(100);
-	}
-
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// Show the Up button in the action bar.
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == android.R.id.home) {
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			// TODO: If Settings has multiple levels, Up should navigate up
-			// that hierarchy.
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -221,70 +152,5 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
-	}
-	
-	public void init(){
-		
-	}
-	
-	@Override
-	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
-		// TODO Auto-generated method stub
-		int users = arg0.getJoinedUsers().length;
-		System.out.println("num users = " + users);
-		String[] users2 = arg0.getJoinedUsers();
-		for (String user : users2)
-			System.out.println(user);
-		if (users>1) {
-			FullscreenActivity.theClient.startGame();
-		}
-	}
-
-	@Override
-	public void onJoinRoomDone(RoomEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onLeaveRoomDone(RoomEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onLockPropertiesDone(byte arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSetCustomRoomDataDone(LiveRoomInfoEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSubscribeRoomDone(RoomEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onUnSubscribeRoomDone(RoomEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onUnlockPropertiesDone(byte arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onUpdatePropertyDone(LiveRoomInfoEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
