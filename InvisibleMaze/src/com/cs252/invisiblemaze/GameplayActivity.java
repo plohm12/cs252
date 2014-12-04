@@ -127,29 +127,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		setContentView(new GameboardView(this));
 	}
 	
-	public void onStart(){
-		super.onStart();
-		FullscreenActivity.theClient.addRoomRequestListener(this);
-		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		
-		if (Constants.isLocalPlayer){
-			turnText.setText(Constants.localUsername);
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat("I JOINED!");
-
-		}
-		else if (!Constants.isLocalPlayer){
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat(Constants.localUsername);
-			
-		}
-	}
 	
-	public void onStop() {
-		super.onStop();
-		this.finish();
-		FullscreenActivity.theClient.removeRoomRequestListener(this);
-	}
+	
 	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -224,7 +203,20 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	}
 	
 	public void init(){
+		FullscreenActivity.theClient.addRoomRequestListener(this);
+		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
 		
+		if (Constants.isLocalPlayer){
+			turnText.setText(Constants.localUsername);
+			System.out.println(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat("I JOINED!");
+
+		}
+		else if (!Constants.isLocalPlayer){
+			System.out.println(Constants.localUsername);
+			FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			
+		}
 	}
 	
 	@Override
