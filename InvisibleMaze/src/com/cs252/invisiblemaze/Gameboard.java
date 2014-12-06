@@ -9,16 +9,14 @@ public class Gameboard {
 	private static final int RIGHT = 2;
 	private static final int LEFT = 3;
 	private static final int PATHSIZE = 16; //CHANGE IN FUTURE
+	private static final int GRIDSIZE = 6;
 	Space start;
 	Space finish;
 	Space player;
-	int gridSize;
 	ArrayList<Space> spaces;
 	
 	public Gameboard(int n){
 		start = new Space(0, 0);
-		start.setInPath(true);
-		gridSize = n;
 	}
 	
 	/**
@@ -96,8 +94,8 @@ public class Gameboard {
 	public boolean isValidSpace(int x, int y){
 		if(x < 0) return false;
 		if(y < 0) return false;
-		if(x >= gridSize) return false;
-		if(y >= gridSize) return false;
+		if(x >= GRIDSIZE) return false;
+		if(y >= GRIDSIZE) return false;
 		return true;
 	}
 	
@@ -126,12 +124,13 @@ public class Gameboard {
 		Space temp = new Space(x, y);
 		if( !player.getNext().equals(temp))
 			player = start;
-		else{
+		else
 			player = temp;
-			if(player.equals(finish)){
-				//PLAYER HAS WON!!
-			}
-			// Update board position.
+		
+		// Update Board Positions
+		
+		if(player.equals(finish)){
+			//PLAYER HAS WON!!
 		}
 	}
 }
