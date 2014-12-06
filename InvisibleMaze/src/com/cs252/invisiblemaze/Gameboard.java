@@ -17,8 +17,9 @@ public class Gameboard {
 	Space player;
 	ArrayList<Space> spaces;
 	
-	public Gameboard(int n){
+	public Gameboard(){
 		start = new Space(0, 0);
+		makePath();
 	}
 	
 	/**
@@ -139,6 +140,14 @@ public class Gameboard {
 		if(player.equals(finish)){
 			//PLAYER HAS WON!!
 		}
+	}
+	
+	public Space getFinish(){
+		return finish;
+	}
+	
+	public Space getPlayer(){
+		return player;
 	}
 }
 
