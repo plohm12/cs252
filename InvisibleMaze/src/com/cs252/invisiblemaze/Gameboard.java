@@ -12,10 +12,10 @@ public class Gameboard {
 	private static final int LEFT = 3;
 	private static final int PATHSIZE = 16; //CHANGE IN FUTURE
 	private static final int GRIDSIZE = 6;
-	Space start;
-	Space finish;
-	Space player;
-	ArrayList<Space> spaces;
+	private Space start;
+	private Space finish;
+	private Space player;
+	private ArrayList<Space> spaces;
 	
 	public Gameboard(){
 		start = new Space(0, 0);
