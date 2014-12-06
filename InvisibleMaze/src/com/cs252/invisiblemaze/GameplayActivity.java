@@ -123,7 +123,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			}
 		});
 
-		init();
+		//init();
 		setContentView(new GameboardView(this));
 	}
 	

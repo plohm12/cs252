@@ -7,6 +7,7 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListene
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -113,6 +114,7 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 				}
 			}
 		});
+		init();
 	}
 
 	@Override
@@ -159,26 +161,31 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
 	public void init(){
+		System.out.println("hello");
 		FullscreenActivity.theClient.addRoomRequestListener(this);
+	//	System.out.println(users);
+		while(users<3){
 		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		
+		if(users>1){
+			System.out.println("more than 1!!s");
+			Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
+			startActivity(myIntent);
+			break;
+		}
 		if (Constants.isLocalPlayer){
 		//	turnText.setText(Constants.localUsername);
-			System.out.println(Constants.localUsername);
+		//	System.out.println(Constants.localUsername);
 			FullscreenActivity.theClient.sendChat("I JOINED!");
 
 		}
 		else if (!Constants.isLocalPlayer){
-			System.out.println(Constants.localUsername);
+		//	System.out.println(Constants.localUsername);
 			FullscreenActivity.theClient.sendChat(Constants.localUsername);
 			
 		}
-		while(users>1){
-		if(users>1){
-			System.out.println("more than 1!");
+	
 		}
-		}
-		
+		System.out.println("two done!");
 	}
 	@Override
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
@@ -190,7 +197,8 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 			System.out.println(user);
 		if (users>1) {
 			//FullscreenActivity.theClient.startGame();
-		}
+			System.out.println("two users!");
+					}
 	}
 
 	@Override
