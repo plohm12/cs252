@@ -3,6 +3,8 @@ package com.cs252.invisiblemaze;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.view.View;
+
 public class Gameboard {
 	private static final int UP = 0;
 	private static final int DOWN = 1;
@@ -104,19 +106,23 @@ public class Gameboard {
 	/**
 	 * Move the player
 	 */
-	public void move(int direction){
+	public void move(View view) {
 		int x, y;
-		switch(direction){
-		case(UP):		x = player.getX();
+		switch(view.getId()) {
+		case(R.id.up_button):		
+						x = player.getX();
 						y = player.getY() + 1;
 						break;
-		case(DOWN):		x = player.getX();
+		case(R.id.down_button):		
+						x = player.getX();
 						y = player.getY() - 1;
 						break;
-		case(RIGHT):	x = player.getX() + 1;
+		case(R.id.right_button):	
+						x = player.getX() + 1;
 						y = player.getY();
 						break;
-		case(LEFT):		x = player.getX() - 1;
+		case(R.id.left_button):		
+						x = player.getX() - 1;
 						y = player.getY();
 						break;
 		default:		x = -1;

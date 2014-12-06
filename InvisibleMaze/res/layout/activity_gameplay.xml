@@ -41,7 +41,8 @@
           	android:layout_width="wrap_content"
            	android:layout_height="wrap_content"
            	android:text="@string/up"
-           	android:textColor="#FFD700" />
+           	android:textColor="#FFD700" 
+           	android:onClick="move" />
 	    
 	  	<LinearLayout
 			android:id="@+id/left_right_buttons" 
@@ -56,14 +57,16 @@
           		android:layout_width="wrap_content"
            		android:layout_height="wrap_content"
            		android:text="@string/left"
-           		android:textColor="#FFD700" />
+           		android:textColor="#FFD700" 
+           		android:onClick="move" />
 	  	 
 	  	   	<Button
            		android:id="@+id/right_button"
           		android:layout_width="wrap_content"
            		android:layout_height="wrap_content"
            		android:text="@string/right"
-           		android:textColor="#FFD700" />
+           		android:textColor="#FFD700" 
+           		android:onClick="move" />
 	  	    
 		</LinearLayout>
 	    
@@ -74,7 +77,8 @@
           	android:layout_width="wrap_content"
            	android:layout_height="wrap_content"
            	android:text="@string/down"
-           	android:textColor="#FFD700" />
+           	android:textColor="#FFD700" 
+           	android:onClick="move" />
 
       	<LinearLayout
             android:id="@+id/fullscreen_content_controls"
