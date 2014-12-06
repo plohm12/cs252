@@ -226,7 +226,7 @@ import android.widget.EditText;
 			public void run() {
 				// TODO Auto-generated method stub
 				//	progressDialog.dismiss();
-				if (success && numPlayers > 1) {
+				if (success && numPlayers >= 1) {
 					Intent myIntent = new Intent(FullscreenActivity.this, SearchActivity.class);
 					startActivity(myIntent);
 				} else {

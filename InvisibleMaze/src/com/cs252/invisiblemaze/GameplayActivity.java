@@ -9,12 +9,18 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListene
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
@@ -54,12 +60,17 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private SystemUiHider mSystemUiHider;
 
 	private TextView turnText;
+	
+	//private GameboardView gameboardView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_gameplay);
+				
+		LinearLayout gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
+		gameboardView.addView(new GameboardView(this));
+		
 		setupActionBar();
 		
 
@@ -124,7 +135,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		});
 
 		init();
-		setContentView(new GameboardView(this));
 	}
 	
 	
