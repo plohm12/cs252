@@ -107,25 +107,26 @@ public class Gameboard {
 	public void move(View view) {
 		int x, y;
 		switch(view.getId()) {
-		case(R.id.up_button):		
-						x = player.getX();
-						y = player.getY() + 1;
-						break;
-		case(R.id.down_button):		
-						x = player.getX();
-						y = player.getY() - 1;
-						break;
-		case(R.id.right_button):	
-						x = player.getX() + 1;
-						y = player.getY();
-						break;
-		case(R.id.left_button):		
-						x = player.getX() - 1;
-						y = player.getY();
-						break;
-		default:		x = -1;
-						y = -1;
-						break;
+		case(R.id.up_button):
+			x = player.getX();
+			y = player.getY() + 1;
+			break;
+		case(R.id.down_button):
+			x = player.getX();
+			y = player.getY() - 1;
+			break;
+		case(R.id.right_button):
+			x = player.getX() + 1;
+			y = player.getY();
+			break;
+		case(R.id.left_button):
+			x = player.getX() - 1;
+			y = player.getY();
+			break;
+		default:
+			x = -1;
+			y = -1;
+			break;
 		}
 		Space temp = new Space(x, y);
 		if( !player.getNext().equals(temp))
