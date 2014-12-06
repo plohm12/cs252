@@ -12,13 +12,15 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 
 	GameboardViewThread _thread;
 	Rect[][] _squares;
-	int GRID_WIDTH = 6;  // Amount of columns
-	int GRID_HEIGHT = 6; // Amount of rows
+	int GRID_WIDTH;  // Amount of columns
+	int GRID_HEIGHT; // Amount of rows
 	
-	public GameboardView(Context context) { 
+	public GameboardView(Context context, int gameSize) { 
 		super(context);
 		getHolder().addCallback(this);
 		this.setBackgroundColor(Color.WHITE);
+		this.GRID_HEIGHT = gameSize;
+		this.GRID_WIDTH = gameSize;
 	}
 	
 	@Override

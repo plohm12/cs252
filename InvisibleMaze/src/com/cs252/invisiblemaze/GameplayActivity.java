@@ -55,6 +55,10 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private SystemUiHider mSystemUiHider;
 
 	private TextView turnText;
+	
+	private int GAME_SIZE = 6;
+	
+	private Gameboard gameboard;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		setContentView(R.layout.activity_gameplay);
 				
 		LinearLayout gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
-		gameboardView.addView(new GameboardView(this));
+		gameboardView.addView(new GameboardView(this, GAME_SIZE));
+		
+		gameboard = new Gameboard(GAME_SIZE);
 		
 		setupActionBar();
-		
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -278,5 +283,9 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	public void onUpdatePropertyDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void move(View view) {
+		gameboard.move(view);
 	}
 }
