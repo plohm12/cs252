@@ -8,7 +8,12 @@ public class Control {
 	enum Arrow {
 		LEFT, RIGHT, UP, DOWN
 	}
+<<<<<<< HEAD
 
+=======
+*/
+	/*
+>>>>>>> c4097bdefc4aa0b6cc8f5d9d784367aafb9c6c8d
 	public boolean isValidMove(Player p, KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
