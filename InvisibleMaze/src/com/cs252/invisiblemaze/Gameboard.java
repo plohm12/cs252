@@ -133,11 +133,15 @@ public class Gameboard {
 			y = -1;
 			break;
 		}
+		Space current = start;
+		while(!current.equals(player)){
+			current = current.getNext();
+		}
 		Space temp = new Space(x, y);
-		if( !player.getNext().equals(temp))
-			player = start;
-		else
+		if( current.getNext().equals(temp))
 			player = temp;
+		else
+			player = start;
 		
 		// Update Board Positions
 		
