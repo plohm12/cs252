@@ -15,8 +15,6 @@ public class Gameboard {
 	Space start;
 	Space finish;
 	Space player;
-	
-	public Space current;
 	ArrayList<Space> spaces;
 
 	public Gameboard(){
@@ -30,7 +28,7 @@ public class Gameboard {
 	public void makePath(){
 		System.out.println("Trying to make a new path...");
 		spaces = new ArrayList<Space>();
-		current = start;
+		Space current = start;
 		player = start;
 		int count = 0;
 		while(count < PATHSIZE){
@@ -108,8 +106,9 @@ public class Gameboard {
 	
 	/**
 	 * Move the player
+	 * @return true if the player has finished, false otherwise
 	 */
-	public void move(View view) {
+	public boolean move(View view) {
 		int x, y;
 		switch(view.getId()) {
 		case(R.id.up_button):
@@ -147,7 +146,9 @@ public class Gameboard {
 		
 		if(player.equals(finish)){
 			//PLAYER HAS WON!!
+			return true;
 		}
+		return false;
 	}
 	
 	public Space getFinish(){

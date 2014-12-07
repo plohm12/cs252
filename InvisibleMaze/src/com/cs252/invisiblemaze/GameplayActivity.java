@@ -293,7 +293,9 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		
 	}
 	
-	public void move(View view) {
-		gameboard.move(view);
+	public boolean move(View view) {
+		if(gameboard.move(view))
+			return true;
+		return false;
 	}
 }
