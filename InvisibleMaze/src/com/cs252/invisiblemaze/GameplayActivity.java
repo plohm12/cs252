@@ -69,7 +69,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
 		//gameboardView.addView(new GameboardView(this, GAME_SIZE));
 		
-		gameboard = new Gameboard(GAME_SIZE);
+		gameboard = new Gameboard();
 		
 		setupActionBar();
 
