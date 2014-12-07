@@ -2,6 +2,7 @@ package com.cs252.invisiblemaze;
 
 import com.cs252.invisiblemaze.util.SystemUiHider;
 import com.shephertz.app42.gaming.multiplayer.client.events.LiveRoomInfoEvent;
+import com.shephertz.app42.gaming.multiplayer.client.events.MoveEvent;
 import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
 import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListener;
 
@@ -60,6 +61,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	
 	private Gameboard gameboard;
 	private LinearLayout gameboardView;
+	private GameMessenger messenger;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,7 +135,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 				}
 			}
 		});
-
+		messenger = new GameMessenger(this);
+		turnText = (TextView)findViewById(R.id.turn_player_name);
 		//init();
 		//setContentView(new GameboardView(this, 6));
 
@@ -152,6 +155,20 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	public void onStart(){
 		super.onStart();
 		gameboardView.addView(new GameboardView(this, GAME_SIZE));
+		messenger.start();
+		FullscreenActivity.theClient.addRoomRequestListener(this);
+		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
+		if(Constants.isLocalPlayer){
+			isLocalTurn = true;
+			turnText.setText("Next Turn "+Constants.localUsername);
+		}
+	}
+	@Override
+	public void onStop(){
+		super.onStop();
+		this.finish();
+		messenger.stop();
+		FullscreenActivity.theClient.removeRoomRequestListener(this);
 	}
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -206,6 +223,10 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		}
 	};
 
+	private boolean isLocalTurn = false;
+
+	private Handler UIThreadHandler = new Handler();
+
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
@@ -231,7 +252,45 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			
 		}
 	}
-	
+	public void onGameStarted(final String nt){
+		if(nt.equals(Constants.localUsername)){
+			isLocalTurn  = true;
+		}
+		else{
+			isLocalTurn = false;
+		}
+		UIThreadHandler .post(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				turnText.setText("Next Turn"+nt);
+			}
+			
+		});
+		
+	}
+	void handleRemoteLeft(){
+		FullscreenActivity.theClient.deleteRoom(Constants.room_id);
+		UIThreadHandler.post(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GameplayActivity.this.finish();
+				
+			}
+			
+		});
+	}
+	public void onMoveCompleted(final MoveEvent evt){
+		if(evt.getNextTurn().equals(Constants.localUsername)){
+			isLocalTurn = true;
+		}
+		else{
+			isLocalTurn = false;
+		}
+	}
 	@Override
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub

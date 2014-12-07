@@ -74,7 +74,7 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 	public void onGameStarted(String arg0, String arg1, String arg2) {
 		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onGameStarted nextTurn "+arg2); 
-       // game.oneGameStarted(arg2);
+        game.onGameStarted(arg2);
 	}
 
 	@Override
