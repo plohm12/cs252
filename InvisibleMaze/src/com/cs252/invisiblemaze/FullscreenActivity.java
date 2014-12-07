@@ -42,7 +42,7 @@ import android.widget.EditText;
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
 	public final static String EXTRA = "com.cs252.invisiblemaze.MESSAGE";
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 	public static String key = "caa5645bb9166b904e763ce781eeec1f80fb163ea02b504af45d3469d0550acf";
 	public static String secertKey = "efd8256cda6edc66a30c34e5e740f61e3572c9d71ab1cb9d5cc206c84f47fba0";
 	private FindRoom rf = new FindRoom();
@@ -59,7 +59,7 @@ import android.widget.EditText;
 	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
 	 * will show the system UI visibility upon interaction.
 	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
+	private static final boolean TOGGLE_ON_CLICK = false;
 
 	/**
 	 * The flags to pass to {@link SystemUiHider#getInstance}.

@@ -30,7 +30,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -42,7 +42,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
 	 * will show the system UI visibility upon interaction.
 	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
+	private static final boolean TOGGLE_ON_CLICK = false;
 
 	/**
 	 * The flags to pass to {@link SystemUiHider#getInstance}.
@@ -68,7 +68,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		LinearLayout gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
 		gameboardView.addView(new GameboardView(this, GAME_SIZE));
 		
-		gameboard = new Gameboard(GAME_SIZE);
+		gameboard = new Gameboard();
 		
 		setupActionBar();
 
