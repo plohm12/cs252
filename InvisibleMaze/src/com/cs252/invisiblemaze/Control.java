@@ -1,7 +1,6 @@
 package com.cs252.invisiblemaze;
 
 import java.util.*;
-import java.lang.*;
 import android.view.KeyEvent;
 
 public class Control {
@@ -9,7 +8,7 @@ public class Control {
 	enum Arrow {
 		LEFT, RIGHT, UP, DOWN
 	}
-*/
+
 	public boolean isValidMove(Player p, KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
@@ -87,4 +86,5 @@ public class Control {
 				break;			
 		}
 	}
+	*/
 }

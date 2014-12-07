@@ -51,7 +51,7 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		}
 		Paint finishP = new Paint();
 		finishP.setColor(Color.YELLOW);
-		Gameboard gb = new Gameboard(6);
+		Gameboard gb = new Gameboard();
 		System.out.println("finish:"+ gb.finish.getX()+gb.finish.getY());
 		canvas.drawRect(_squares[gb.finish.getX()][gb.finish.getY()],finishP);
 		

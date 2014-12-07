@@ -47,7 +47,6 @@ import android.widget.EditText;
 	public static String secertKey = "efd8256cda6edc66a30c34e5e740f61e3572c9d71ab1cb9d5cc206c84f47fba0";
 	private FindRoom rf = new FindRoom();
     private ProgressDialog progressDialog;
-    public int numPlayers = 0;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -226,10 +225,7 @@ import android.widget.EditText;
 			public void run() {
 				// TODO Auto-generated method stub
 				//	progressDialog.dismiss();
-				if (success && numPlayers >= 1) {
-					Intent myIntent = new Intent(FullscreenActivity.this, SearchActivity.class);
-					startActivity(myIntent);
-				} else {
+				if (success) {
 					Intent myIntent = new Intent(FullscreenActivity.this, SearchActivity.class);
 					startActivity(myIntent);
 				}
@@ -342,7 +338,6 @@ import android.widget.EditText;
 		public void onJoinRoomDone(RoomEvent arg0) {
 			// TODO Auto-generated method stub
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
-				numPlayers++;
 				theClient.subscribeRoom(arg0.getData().getId());
 			} else {
 				theClient.createTurnRoom("dynamic", "dev", 2, null, 30);
