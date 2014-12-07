@@ -14,13 +14,16 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 	public Rect[][] _squares;
 	int GRID_WIDTH;  // Amount of columns
 	int GRID_HEIGHT; // Amount of rows
-	
+	Gameboard gb;
 	public GameboardView(Context context, int gameSize) { 
 		super(context);
 		getHolder().addCallback(this);
 		this.setBackgroundColor(Color.WHITE);
 		this.GRID_HEIGHT = gameSize;
 		this.GRID_WIDTH = gameSize;
+			gb = new Gameboard();
+	        _squares = new Rect[GRID_HEIGHT][GRID_WIDTH];
+
 	}
 	
 	@Override
@@ -35,7 +38,6 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
         
         int GRID_SIZE = ((canvas.getWidth() - ((GRID_WIDTH - 1) * 5)) / GRID_WIDTH) + 1;  // Width and height of a cell
         
-        _squares = new Rect[GRID_HEIGHT][GRID_WIDTH];
 		
 		for(int i = 0; i < GRID_WIDTH; i++) {
 		    for(int j = 0; j < GRID_HEIGHT; j++) {
@@ -51,7 +53,6 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		}
 		Paint finishP = new Paint();
 		finishP.setColor(Color.YELLOW);
-		Gameboard gb = new Gameboard(6);
 		System.out.println("finish:"+ gb.finish.getX()+gb.finish.getY());
 		canvas.drawRect(_squares[gb.finish.getX()][gb.finish.getY()],finishP);
 		

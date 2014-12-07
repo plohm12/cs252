@@ -10,6 +10,7 @@ public class Control {
 		LEFT, RIGHT, UP, DOWN
 	}
 */
+	/*
 	public boolean isValidMove(Player p, KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
@@ -87,4 +88,5 @@ public class Control {
 				break;			
 		}
 	}
+	*/
 }
