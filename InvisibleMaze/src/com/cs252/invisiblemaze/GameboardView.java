@@ -68,9 +68,6 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		    }
 		   
 		}
-		System.out.println("finish:"+ gb.finish.getX()+gb.finish.getY());
-		canvas.drawRect(_squares[gb.finish.getX()][gb.finish.getY()],finishP);
-		
     }
 
 	@Override
