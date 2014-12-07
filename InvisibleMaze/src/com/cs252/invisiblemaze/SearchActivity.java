@@ -25,7 +25,7 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -37,12 +37,12 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
 	 * will show the system UI visibility upon interaction.
 	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
+	private static final boolean TOGGLE_ON_CLICK = false;
 
 	/**
 	 * The flags to pass to {@link SystemUiHider#getInstance}.
 	 */
-	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
+	private static final int HIDER_FLAGS = 0;
 
 	/**
 	 * The instance of the {@link SystemUiHider} for this activity.
@@ -114,9 +114,12 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 				}
 			}
 		});
-		init();
 	}
+	public void onStart(){
+		super.onStart();
+		init();
 
+	}
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -161,13 +164,14 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
 	public void init(){
-		System.out.println("hello");
+	//	System.out.println("hello");
 		FullscreenActivity.theClient.addRoomRequestListener(this);
 	//	System.out.println(users);
 		while(users<3){
 		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
 		if(users>1){
-			System.out.println("more than 1!!s");
+		//	System.out.println("more than 1!!s");
+			FullscreenActivity.theClient.startGame();
 			Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
 			startActivity(myIntent);
 			break;
@@ -191,13 +195,13 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
 		users = arg0.getJoinedUsers().length;
-		System.out.println("num users = " + users);
+	///	System.out.println("num users = " + users);
 		String[] users2 = arg0.getJoinedUsers();
 		for (String user : users2)
-			System.out.println(user);
+		//	System.out.println(user);
 		if (users>1) {
 			//FullscreenActivity.theClient.startGame();
-			System.out.println("two users!");
+		//	System.out.println("two users!");
 					}
 	}
 

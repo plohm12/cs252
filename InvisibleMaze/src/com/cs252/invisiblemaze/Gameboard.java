@@ -15,10 +15,13 @@ public class Gameboard {
 	Space start;
 	Space finish;
 	Space player;
+	
+	public Space current;
 	ArrayList<Space> spaces;
 	
 	public Gameboard(int n){
 		start = new Space(0, 0);
+		makePath();
 	}
 	
 	/**
@@ -27,7 +30,7 @@ public class Gameboard {
 	public void makePath(){
 		System.out.println("Trying to make a new path...");
 		spaces = new ArrayList<Space>();
-		Space current = start;
+		current = start;
 		player = start;
 		int count = 0;
 		while(count < PATHSIZE){
@@ -59,6 +62,7 @@ public class Gameboard {
 			if(numChoices < 1){
 				// Dead end. Retry.
 				makePath();
+				return;
 			}
 			
 			int[] spaceChoices = new int[numChoices]; //key=negligible, value=direction
@@ -91,6 +95,7 @@ public class Gameboard {
 			count++;
 		}
 		System.out.println("Finished at ("+finish.getX()+", "+finish.getY()+")");
+		
 	}
 	
 	public boolean isValidSpace(int x, int y){

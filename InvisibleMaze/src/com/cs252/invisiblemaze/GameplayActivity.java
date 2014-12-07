@@ -30,7 +30,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
-	private static final boolean AUTO_HIDE = true;
+	private static final boolean AUTO_HIDE = false;
 
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -42,12 +42,12 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
 	 * will show the system UI visibility upon interaction.
 	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
+	private static final boolean TOGGLE_ON_CLICK = false;
 
 	/**
 	 * The flags to pass to {@link SystemUiHider#getInstance}.
 	 */
-	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
+	private static final int HIDER_FLAGS = 0;
 
 	/**
 	 * The instance of the {@link SystemUiHider} for this activity.
@@ -59,14 +59,15 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private int GAME_SIZE = 6;
 	
 	private Gameboard gameboard;
-		
+	private LinearLayout gameboardView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_gameplay);
 				
-		LinearLayout gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
-		gameboardView.addView(new GameboardView(this, GAME_SIZE));
+		gameboardView = (LinearLayout)findViewById(R.id.gameboardView);
+		//gameboardView.addView(new GameboardView(this, GAME_SIZE));
 		
 		gameboard = new Gameboard(GAME_SIZE);
 		
@@ -77,6 +78,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
+
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
 				HIDER_FLAGS);
 		mSystemUiHider.setup();
@@ -133,7 +135,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		});
 
 		//init();
-		setContentView(new GameboardView(this, 6));
+		//setContentView(new GameboardView(this, 6));
 
 	}
 	
@@ -146,7 +148,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		// are available.
 		delayedHide(100);
 	}
-
+	@Override
+	public void onStart(){
+		super.onStart();
+		gameboardView.addView(new GameboardView(this, GAME_SIZE));
+	}
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */

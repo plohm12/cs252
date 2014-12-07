@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 public class GameboardView extends SurfaceView implements SurfaceHolder.Callback {
 
 	GameboardViewThread _thread;
-	Rect[][] _squares;
+	public Rect[][] _squares;
 	int GRID_WIDTH;  // Amount of columns
 	int GRID_HEIGHT; // Amount of rows
 	
@@ -47,7 +47,14 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		        _squares[j][i] = rect;
 		        canvas.drawRect(rect, paint);
 		    }
+		   
 		}
+		Paint finishP = new Paint();
+		finishP.setColor(Color.YELLOW);
+		Gameboard gb = new Gameboard(6);
+		System.out.println("finish:"+ gb.finish.getX()+gb.finish.getY());
+		canvas.drawRect(_squares[gb.finish.getX()][gb.finish.getY()],finishP);
+		
     }
 
 	@Override
