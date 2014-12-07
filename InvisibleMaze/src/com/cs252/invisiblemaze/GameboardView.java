@@ -15,15 +15,27 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 	int GRID_WIDTH;  // Amount of columns
 	int GRID_HEIGHT; // Amount of rows
 	Gameboard gb;
+	Paint paint;
+	Paint playerP;
+	Paint finishP;
+	
 	public GameboardView(Context context, int gameSize) { 
 		super(context);
 		getHolder().addCallback(this);
 		this.setBackgroundColor(Color.WHITE);
 		this.GRID_HEIGHT = gameSize;
 		this.GRID_WIDTH = gameSize;
+		
+		paint = new Paint();
+        paint.setColor(Color.LTGRAY);
+        playerP = new Paint();
+        playerP.setColor(Color.BLUE);
+		finishP = new Paint();
+		finishP.setColor(Color.YELLOW);
+		
 		gb = new Gameboard();
 	    _squares = new Rect[GRID_HEIGHT][GRID_WIDTH];
-
+	        
 	}
 	
 	@Override
@@ -33,13 +45,8 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		
 		System.out.println("IN ONDRAW");
 		
-        Paint paint = new Paint();
-        paint.setColor(Color.LTGRAY);
-        
-        int GRID_SIZE = ((canvas.getWidth() - ((GRID_WIDTH - 1) * 5)) / GRID_WIDTH) + 1;  // Width and height of a cell
-        
-		
-		for(int i = 0; i < GRID_WIDTH; i++) {
+		int GRID_SIZE = ((canvas.getWidth() - ((GRID_WIDTH - 1) * 5)) / GRID_WIDTH) + 1;  // Width and height of a cell
+        for(int i = 0; i < GRID_WIDTH; i++) {
 		    for(int j = 0; j < GRID_HEIGHT; j++) {
 		    	int left = i * (GRID_SIZE + 5);
 		    	int top = j * (GRID_SIZE + 5);
@@ -47,12 +54,20 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		    	int bottom = top + GRID_SIZE;
 		        Rect rect = new Rect(left, top, right, bottom);
 		        _squares[j][i] = rect;
-		        canvas.drawRect(rect, paint);
+		        Space temp = new Space(j, i);
+		        
+		        // Color the player's square and the finish square
+		        if(gb.getPlayer().equals(temp)){
+		        	canvas.drawRect(_squares[j][i], playerP);
+		        }
+		        else if(gb.getFinish().equals(temp)){
+		        	canvas.drawRect(_squares[j][i], finishP);
+		        }
+		        else
+		        	canvas.drawRect(_squares[j][i], paint);
 		    }
 		   
 		}
-		Paint finishP = new Paint();
-		finishP.setColor(Color.YELLOW);
 		System.out.println("finish:"+ gb.finish.getX()+gb.finish.getY());
 		canvas.drawRect(_squares[gb.finish.getX()][gb.finish.getY()],finishP);
 		
