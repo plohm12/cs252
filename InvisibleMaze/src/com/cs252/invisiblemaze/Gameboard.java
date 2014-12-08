@@ -148,6 +148,8 @@ public class Gameboard {
 		if(player.equals(finish)){
 			//PLAYER HAS WON!!
 		}
+		GameboardView.updateDraw(x,y);
+		
 	}
 	
 	public Space getFinish(){

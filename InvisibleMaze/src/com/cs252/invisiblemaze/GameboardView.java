@@ -11,12 +11,13 @@ import android.view.SurfaceView;
 public class GameboardView extends SurfaceView implements SurfaceHolder.Callback {
 
 	GameboardViewThread _thread;
-	public Rect[][] _squares;
+	public static Rect[][] _squares;
 	int GRID_WIDTH;  // Amount of columns
 	int GRID_HEIGHT; // Amount of rows
 	Gameboard gb;
 	Paint paint;
-	Paint playerP;
+	static Paint playerP;
+	static Canvas canvas;
 	Paint finishP;
 	
 	public GameboardView(Context context, int gameSize) { 
@@ -42,7 +43,7 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
     public void onDraw(Canvas canvas)
     {
 		super.onDraw(canvas);
-		
+		GameboardView.canvas = canvas;
 		System.out.println("IN ONDRAW");
 		
 		int GRID_SIZE = ((canvas.getWidth() - ((GRID_WIDTH - 1) * 5)) / GRID_WIDTH) + 1;  // Width and height of a cell
@@ -69,6 +70,11 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		   
 		}
     }
+	static void updateDraw(int x, int y){
+		System.out.println("update");
+		canvas.drawRect(_squares[1][1], playerP);
+		
+	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
