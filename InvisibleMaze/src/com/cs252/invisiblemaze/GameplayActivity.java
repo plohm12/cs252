@@ -27,6 +27,7 @@ import android.support.v4.app.NavUtils;
  * @see SystemUiHider
  */
 public class GameplayActivity extends Activity implements RoomRequestListener{
+	GameboardView gbv;
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -154,7 +155,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	@Override
 	public void onStart(){
 		super.onStart();
-		gameboardView.addView(new GameboardView(this, GAME_SIZE));
+		gbv = new GameboardView(this, GAME_SIZE);
+		gameboardView.addView(gbv);
 		messenger.start();
 		FullscreenActivity.theClient.addRoomRequestListener(this);
 		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
@@ -353,8 +355,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	}
 	
 	public boolean move(View view) {
-		if(gameboard.move(view))
+		if(gameboard.move(view)){
+			gbv.postInvalidate();
 			return true;
+		}
+		gbv.postInvalidate();
 		return false;
 	}
 }

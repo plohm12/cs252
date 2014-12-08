@@ -58,6 +58,7 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		        
 		        // Color the player's square and the finish square
 		        if(gb.getPlayer().equals(temp)){
+		        	System.out.println("Player is at "+gb.getPlayer().getX()+", "+gb.getPlayer().getY());
 		        	canvas.drawRect(_squares[j][i], playerP);
 		        }
 		        else if(gb.getFinish().equals(temp)){
