@@ -6,8 +6,6 @@ import com.shephertz.app42.gaming.multiplayer.client.events.MoveEvent;
 import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
 import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListener;
 
-//import android.R;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -117,11 +115,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 							controlsView.setVisibility(visible ? View.VISIBLE
 									: View.GONE);
 						}
-
-						if (visible && AUTO_HIDE) {
-							// Schedule a hide().
-							delayedHide(AUTO_HIDE_DELAY_MILLIS);
-						}
 					}
 				});
 
@@ -155,7 +148,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	@Override
 	public void onStart(){
 		super.onStart();
-		gbv = new GameboardView(this, GAME_SIZE);
+		gbv = new GameboardView(this, GAME_SIZE, gameboard);
 		gameboardView.addView(gbv);
 		messenger.start();
 		FullscreenActivity.theClient.addRoomRequestListener(this);
@@ -278,11 +271,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				GameplayActivity.this.finish();
-				
 			}
-			
 		});
 	}
 	public void onMoveCompleted(final MoveEvent evt){

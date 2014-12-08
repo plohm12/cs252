@@ -158,7 +158,7 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
-	public void init(){
+	public void init() {
 	//	System.out.println("hello");
 		FullscreenActivity.theClient.addRoomRequestListener(this);
 	//	System.out.println(users);
@@ -190,14 +190,11 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
 		users = arg0.getJoinedUsers().length;
-	///	System.out.println("num users = " + users);
-		String[] users2 = arg0.getJoinedUsers();
-		for (String user : users2)
-		//	System.out.println(user);
+
 		if (users>1) {
 			//FullscreenActivity.theClient.startGame();
 		//	System.out.println("two users!");
-					}
+		}
 	}
 
 	@Override

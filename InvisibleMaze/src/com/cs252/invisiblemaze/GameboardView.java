@@ -20,7 +20,7 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 	static Canvas canvas;
 	Paint finishP;
 	
-	public GameboardView(Context context, int gameSize) { 
+	public GameboardView(Context context, int gameSize, Gameboard gameboard) { 
 		super(context);
 		getHolder().addCallback(this);
 		this.setBackgroundColor(Color.WHITE);
@@ -34,7 +34,7 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		finishP = new Paint();
 		finishP.setColor(Color.YELLOW);
 		
-		gb = new Gameboard();
+		gb = gameboard;
 	    _squares = new Rect[GRID_HEIGHT][GRID_WIDTH];
 	        
 	}
