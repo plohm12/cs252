@@ -344,12 +344,12 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		
 	}
 	
-	public boolean move(View view) {
-		if(gameboard.move(view)){
-			gbv.postInvalidate();
-			return true;
-		}
+	public void move(View view) {
+		boolean winner = gameboard.move(view);
 		gbv.postInvalidate();
-		return false;
+		if(winner){
+			//do winner stuff
+			System.out.println("YOU HAVE WON!!!");
+		}
 	}
 }
