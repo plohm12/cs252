@@ -1,6 +1,7 @@
 package com.cs252.invisiblemaze;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,11 @@ public class WinActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.win, menu);
+		Intent intent = getIntent();
+		int score = intent.getIntExtra("totalMoves", 0);
+		MySQLiteHelper db = new MySQLiteHelper(this);
+		db.addScore(new Score(Constants.localUsername,score));
+		
 		return true;
 	}
 
