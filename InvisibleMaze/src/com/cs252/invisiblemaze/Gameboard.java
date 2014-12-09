@@ -16,6 +16,7 @@ public class Gameboard {
 	private Space finish;
 	private Space player;
 	private ArrayList<Space> spaces;
+	private int tries;
 
 	public Gameboard(){
 		start = new Space(0, 0);
@@ -109,6 +110,7 @@ public class Gameboard {
 	 * @return true if the player has finished, false otherwise
 	 */
 	public boolean move(View view) {
+		
 		int x, y;
 		switch(view.getId()) {
 		case(R.id.right_button):
