@@ -167,16 +167,16 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 			FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
 		
 			if (users > 1) {
-				FullscreenActivity.theClient.startGame();
+				//FullscreenActivity.theClient.startGame();
 				Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
 				startActivity(myIntent);
 				break;
 			}
 		
 			if (Constants.isLocalPlayer){
-				FullscreenActivity.theClient.sendChat("I JOINED!");
+				//FullscreenActivity.theClient.sendChat("I JOINED!");
 			} else if (!Constants.isLocalPlayer){
-				FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			//	FullscreenActivity.theClient.sendChat(Constants.localUsername);
 			}
 	
 		}
@@ -185,6 +185,7 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	@Override
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
+		 users = arg0.getJoinedUsers().length;
 	}
 
 	@Override

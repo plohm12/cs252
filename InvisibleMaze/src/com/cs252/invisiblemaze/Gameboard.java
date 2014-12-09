@@ -16,11 +16,9 @@ public class Gameboard {
 	private Space finish;
 	private Space player;
 	private ArrayList<Space> spaces;
-	private int totalMoves;
-
-	public Gameboard(){
+	
+	public Gameboard() {
 		start = new Space(0, 0);
-		totalMoves = 0;
 		makePath();
 	}
 	
@@ -114,7 +112,7 @@ public class Gameboard {
 	 * @return true if the player has finished, false otherwise
 	 */
 	public boolean move(View view) {
-		totalMoves++;
+		
 		int x, y;
 		switch(view.getId()) {
 		case(R.id.right_button):
@@ -164,10 +162,6 @@ public class Gameboard {
 	
 	public Space getPlayer() {
 		return player;
-	}
-	
-	public int getTotalMoves(){
-		return totalMoves;
 	}
 }
 
