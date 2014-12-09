@@ -169,7 +169,7 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 		FullscreenActivity.theClient.removeNotificationListener(this);
 		FullscreenActivity.theClient.removeTurnBasedRoomListener(this);
 	}
-	public void sendMove(){
-		FullscreenActivity.theClient.sendMove("test");
+	public void sendMove(String boardState){
+		FullscreenActivity.theClient.sendMove(boardState);
 	}
 }

@@ -14,8 +14,10 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 /**
@@ -62,6 +64,10 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private Gameboard gameboard;
 	private LinearLayout gameboardView;
 	private GameMessenger messenger;
+	private Button upButton;
+	private Button downButton;
+	private Button rightButton;
+	private Button leftButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +78,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		//gameboardView.addView(new GameboardView(this, GAME_SIZE));
 		
 		gameboard = new Gameboard();
+		
 		
 		setupActionBar();
 
@@ -149,6 +156,10 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	@Override
 	public void onStart(){
 		super.onStart();
+		upButton = (Button)findViewById(R.id.up_button);
+		downButton = (Button)findViewById(R.id.down_button);
+		rightButton = (Button)findViewById(R.id.right_button);
+		leftButton = (Button)findViewById(R.id.left_button);
 		tries = 0;
 		gbv = new GameboardView(this, GAME_SIZE, gameboard);
 		gameboardView.addView(gbv);
@@ -158,6 +169,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if(Constants.isLocalPlayer){
 			isLocalTurn = true;
 			turnText.setText("Next Turn "+Constants.localUsername);
+			
 		}
 	}
 	@Override
@@ -233,28 +245,15 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
 	
-	public void init(){
-		FullscreenActivity.theClient.addRoomRequestListener(this);
-		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		
-		if (Constants.isLocalPlayer){
-			turnText.setText(Constants.localUsername);
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat("I JOINED!");
-
-		}
-		else if (!Constants.isLocalPlayer){
-			System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat(Constants.localUsername);
-			
-		}
-	}
+	
 	public void onGameStarted(final String nt){
 		if(nt.equals(Constants.localUsername)){
 			isLocalTurn  = true;
+		
 		}
 		else{
 			isLocalTurn = false;
+			
 		}
 		UIThreadHandler .post(new Runnable(){
 
@@ -280,10 +279,26 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	public void onMoveCompleted(final MoveEvent evt){
 		if(evt.getNextTurn().equals(Constants.localUsername)){
 			isLocalTurn = true;
+			
 		}
 		else{
 			isLocalTurn = false;
+			
 		}
+		UIThreadHandler.post(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(evt.getMoveData().length()>0){
+					System.out.println("moved completed");
+				}
+				else{
+					turnText.setText("Next Turn " + evt.getNextTurn());
+				}
+			}
+			
+		});
 	}
 	@Override
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
@@ -347,6 +362,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	}
 	
 	public void move(View view) {
+		if(!isLocalTurn){
+			Toast.makeText(this,"Its not your turn!",Toast.LENGTH_SHORT).show();
+			
+			return;
+		}
 		boolean winner = gameboard.move(view);
 		gbv.postInvalidate();
 		if(winner){
@@ -354,9 +374,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			System.out.println("YOU HAVE WON!!!");
 		}
 		tries++;
-		if(tries > 3){
+		if(tries >= 3){
 			//switch player turns
 			tries = 0;
+			messenger.sendMove("moved completed");
+			
 		}
 	}
 }
