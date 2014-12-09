@@ -110,11 +110,12 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 			}
 		});
 	}
-	public void onStart(){
+	
+	public void onStart() {
 		super.onStart();
 		init();
-
 	}
+	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -158,43 +159,32 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
+	
 	public void init() {
-	//	System.out.println("hello");
 		FullscreenActivity.theClient.addRoomRequestListener(this);
-	//	System.out.println(users);
-		while(users<3){
-		FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		if(users>1){
-		//	System.out.println("more than 1!!s");
-			FullscreenActivity.theClient.startGame();
-			Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
-			startActivity(myIntent);
-			break;
-		}
-		if (Constants.isLocalPlayer){
-		//	turnText.setText(Constants.localUsername);
-		//	System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat("I JOINED!");
 
-		}
-		else if (!Constants.isLocalPlayer){
-		//	System.out.println(Constants.localUsername);
-			FullscreenActivity.theClient.sendChat(Constants.localUsername);
-			
-		}
+		while (users < 3) {
+			FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
+		
+			if (users > 1) {
+				FullscreenActivity.theClient.startGame();
+				Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
+				startActivity(myIntent);
+				break;
+			}
+		
+			if (Constants.isLocalPlayer){
+				FullscreenActivity.theClient.sendChat("I JOINED!");
+			} else if (!Constants.isLocalPlayer){
+				FullscreenActivity.theClient.sendChat(Constants.localUsername);
+			}
 	
 		}
-		System.out.println("two done!");
 	}
+	
 	@Override
 	public void onGetLiveRoomInfoDone(LiveRoomInfoEvent arg0) {
 		// TODO Auto-generated method stub
-		users = arg0.getJoinedUsers().length;
-
-		if (users>1) {
-			//FullscreenActivity.theClient.startGame();
-		//	System.out.println("two users!");
-		}
 	}
 
 	@Override

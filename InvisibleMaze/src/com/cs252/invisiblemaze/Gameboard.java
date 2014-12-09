@@ -133,27 +133,27 @@ public class Gameboard {
 			break;
 		}
 		Space current = start;
-		while(!current.equals(player)){
+		while (!current.equals(player)) {
 			current = current.getNext();
 		}
 		Space temp = new Space(x, y);
-		if( current.getNext().equals(temp))
+		if (current.getNext().equals(temp))
 			player = temp;
 		else
 			player = start;
 		
-		if(player.equals(finish)){
+		if (player.equals(finish)) {
 			//PLAYER HAS WON!!
 			return true;
 		}
 		return false;
 	}
 	
-	public Space getFinish(){
+	public Space getFinish() {
 		return finish;
 	}
 	
-	public Space getPlayer(){
+	public Space getPlayer() {
 		return player;
 	}
 }

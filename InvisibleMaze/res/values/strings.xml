@@ -13,5 +13,8 @@
     <string name="down">DOWN</string>
     <string name="left">LEFT</string>
     <string name="right">RIGHT</string>
+    <string name="title_activity_view_scores">ViewScoresActivity</string>
+    <string name="high_scores">High Scores</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -13,11 +13,11 @@ public class Player {
 		this.violation = false;			//This is for available step
 	}
 	
-	public int getCurrentX(){
+	public int getCurrentX() {
 		return currentX;
 	}
 	
-	public int getCurrentY(){
+	public int getCurrentY() {
 		return currentY;
 	}
 	
