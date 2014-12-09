@@ -85,8 +85,6 @@ import android.widget.EditText;
 		mSystemUiHider.setup();
 		mSystemUiHider
 				.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-					// Cached values.
-					int mControlsHeight;
 					int mShortAnimTime;
 
 					@Override

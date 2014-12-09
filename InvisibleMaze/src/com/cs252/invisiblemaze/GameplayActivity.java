@@ -156,7 +156,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 
 		if (Constants.isLocalPlayer) {
 			isLocalTurn = true;
-			turnText.setText("Next Turn "+Constants.localUsername);
+			turnText.setText("Next Turn " + Constants.localUsername);
 		}
 	}
 	
@@ -276,10 +276,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 						System.out.println("You won!");
 						
 					}
-				}
-				
-				else{
-
+				} else {
 					turnText.setText("Next Turn " + evt.getNextTurn());
 				}
 			}

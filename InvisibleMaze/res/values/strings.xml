@@ -22,5 +22,6 @@
     <string name="lose">YOU LOSE</string>
     <string name="score">Score</string>
     <string name="name">Name</string>
+    <string name="turn">Next Turn</string>
 
 </resources>
