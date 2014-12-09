@@ -354,9 +354,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if (winner) {
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
+			
 			messenger.sendMove("1");
-		//	Constants.isLocalPlayer = isLocalTurn;
+			Constants.isLocalPlayer = isLocalTurn;
 			Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
+			myIntent.putExtra("totalMoves", gameboard.getTotalMoves());
 			startActivity(myIntent);
 		}
 		
