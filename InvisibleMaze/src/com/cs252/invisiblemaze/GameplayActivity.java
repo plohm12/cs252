@@ -292,7 +292,13 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 				// TODO Auto-generated method stub
 				if(evt.getMoveData().length()>0){
 					System.out.println("moved completed");
+					turnText.setText("Next Turn " + evt.getNextTurn());
+					if(gameboard.getPlayer().equals(gameboard.getFinish())){
+						System.out.println("You won!");
+						
+					}
 				}
+				
 				else{
 					turnText.setText("Next Turn " + evt.getNextTurn());
 				}
