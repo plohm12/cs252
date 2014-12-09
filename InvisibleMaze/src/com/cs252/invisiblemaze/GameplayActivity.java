@@ -274,9 +274,16 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 					turnText.setText("Next Turn " + evt.getNextTurn());
 					if(evt.getMoveData().equals("1")){
 						System.out.println("You lost!");
+						messenger.sendMove("2");
 						Constants.isLocalPlayer = isLocalTurn;
 						//GameplayActivity.this.finish();
 						Intent myIntent = new Intent(GameplayActivity.this, LoseActivity.class);
+						startActivity(myIntent);
+					}
+					else if(evt.getMoveData().equals("2")){
+						Constants.isLocalPlayer = isLocalTurn;
+						Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
+						myIntent.putExtra("totalMoves", gameboard.getTotalMoves());
 						startActivity(myIntent);
 					}
 				} else {
@@ -357,9 +364,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			
 			messenger.sendMove("1");
 			Constants.isLocalPlayer = isLocalTurn;
-			Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
+			
+			/*Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
 			myIntent.putExtra("totalMoves", gameboard.getTotalMoves());
 			startActivity(myIntent);
+			*/
 		}
 		
 		tries++;
