@@ -20,5 +20,7 @@
     <string name="win">YOU WIN!</string>
     <string name="title_activity_lose">LoseActivity</string>
     <string name="lose">YOU LOSE</string>
+    <string name="score">Score</string>
+    <string name="name">Name</string>
 
 </resources>

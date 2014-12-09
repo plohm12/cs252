@@ -12,5 +12,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/high_scores" />
+    
+    <TableLayout
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_marginTop="30dp"
+    	android:stretchColumns="1">
+    	
+    <TableRow>
+        <TextView
+            android:text="@string/name"
+            android:padding="3dip" />
+        <TextView
+            android:text="@string/score"
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/name"
+            android:padding="3dip" />
+        <TextView
+            android:text="@string/score"
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
+    
+</TableLayout>
 
 </RelativeLayout>

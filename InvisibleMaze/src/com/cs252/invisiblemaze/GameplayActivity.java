@@ -259,7 +259,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		});
 	}
 
-	public void onMoveCompleted(final MoveEvent evt){
+	public void onMoveCompleted(final MoveEvent evt) {
 		if (evt.getNextTurn().equals(Constants.localUsername)) {
 			isLocalTurn = true;	
 		} else {
@@ -269,7 +269,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		UIThreadHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				if (evt.getMoveData().length() > 0){
+				if (evt.getMoveData().length() > 0) {
 					System.out.println("moved completed");
 				} else {
 					turnText.setText("Next Turn " + evt.getNextTurn());
