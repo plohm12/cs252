@@ -43,14 +43,26 @@
             android:name=".SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_search"
+            android:parentActivityName=".FullscreenActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme"
-            android:parentActivityName=".FullscreenActivity" >
+            android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name=".ViewScoresActivity"
             android:label="@string/title_activity_view_scores"
             android:parentActivityName=".FullscreenActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".WinActivity"
+            android:label="@string/title_activity_win"
+ 			android:parentActivityName=".FullscreenActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".LoseActivity"
+            android:label="@string/title_activity_lose" 
+ 			android:parentActivityName=".FullscreenActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>

@@ -8,13 +8,13 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.RoomRequestListene
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,11 +62,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	private Gameboard gameboard;
 	private LinearLayout gameboardView;
 	private GameMessenger messenger;
-
-	private Button upButton;
-	private Button downButton;
-	private Button rightButton;
-	private Button leftButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -152,10 +147,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	@Override
 	public void onStart() {
 		super.onStart();
-		upButton = (Button)findViewById(R.id.up_button);
-		downButton = (Button)findViewById(R.id.down_button);
-		rightButton = (Button)findViewById(R.id.right_button);
-		leftButton = (Button)findViewById(R.id.left_button);
 		tries = 0;
 		gbv = new GameboardView(this, GAME_SIZE, gameboard);
 		gameboardView.addView(gbv);
@@ -355,6 +346,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if (winner) {
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
+			Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
+			startActivity(myIntent);
 		}
 		
 		tries++;

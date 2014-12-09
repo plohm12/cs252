@@ -19,7 +19,6 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.ZoneRequestListene
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
