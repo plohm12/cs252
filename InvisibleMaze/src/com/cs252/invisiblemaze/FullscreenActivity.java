@@ -19,7 +19,6 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.ZoneRequestListene
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,8 +45,7 @@ import android.widget.EditText;
 	public static String key = "caa5645bb9166b904e763ce781eeec1f80fb163ea02b504af45d3469d0550acf";
 	public static String secertKey = "efd8256cda6edc66a30c34e5e740f61e3572c9d71ab1cb9d5cc206c84f47fba0";
 	private FindRoom rf = new FindRoom();
-    private ProgressDialog progressDialog;
-
+    
 	/**
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
 	 * user interaction before hiding the system UI.
@@ -106,11 +104,6 @@ import android.widget.EditText;
 							}
 
 						}
-
-						if (visible && AUTO_HIDE) {
-							// Schedule a hide().
-							delayedHide(AUTO_HIDE_DELAY_MILLIS);
-						}
 					}
 				});
 
@@ -127,23 +120,17 @@ import android.widget.EditText;
 		});
 		
 		init();
-		
-		System.out.println("IN ONCREATE");
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
 		WarpClient.initialize(key, secertKey);
 		WarpClient.enableTrace(true);
 		try {
 			theClient = WarpClient.getInstance();
-
 		} catch (Exception e) {
 			System.out.println("error key\n");
 		}
 		theClient.addConnectionRequestListener(this);
-		
-		System.out.println("IN INIT");
 	}
 
 	@Override
@@ -154,8 +141,6 @@ import android.widget.EditText;
 		// created, to briefly hint to the user that UI controls
 		// are available.
 		delayedHide(100);
-		
-		System.out.println("IN ONPOSTCREATE");
 	}
 
 	/**
@@ -170,8 +155,6 @@ import android.widget.EditText;
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}
 			
-			System.out.println("IN ONTOUCH");
-			
 			return false;
 		}
 	};
@@ -181,8 +164,6 @@ import android.widget.EditText;
 		@Override
 		public void run() {
 			mSystemUiHider.hide();
-			
-			System.out.println("IN RUN");
 		}
 	};
 	
@@ -196,8 +177,6 @@ import android.widget.EditText;
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
-		
-		System.out.println("IN DELAYEDHIDE");
 	}
 
 	public void startMaze(View view) {
@@ -214,47 +193,32 @@ import android.widget.EditText;
 		}
 		theClient.connectWithUserName(userName);
 		Constants.localUsername = userName;
-		
-		System.out.println("IN STARTMAZE");
 	}
 
 	private void onRoomFound(final boolean success) {
     	UIThreadHandler.post(new Runnable() {
-
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				//	progressDialog.dismiss();
 				if (success) {
 					Intent myIntent = new Intent(FullscreenActivity.this, SearchActivity.class);
 					startActivity(myIntent);
 				}
-				
-				System.out.println("IN SECOND RUN");
 			}
     		
     	});
-    	
-    	System.out.println("IN ONROOMFOUND");
     }
 
 	@Override
 	public void onConnectDone(ConnectEvent arg0) {
-		// TODO Auto-generated method stub
 		Log.d("OnConnectDone", arg0.getResult() + "");
 
 		if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
-			// Intent intent = new Intent(this, GameplayActivity.class);
-			// intent.putExtra(EXTRA, userName);
-			// startActivity(intent);
 			System.out.println("sucess\n");
 			rf.findR();
 		} else {
 			onRoomFound(false);
 			System.out.println("error creating\n");
 		}
-		
-		System.out.println("IN ONCONNECTDONE");
 	}
 
 	@Override
@@ -268,6 +232,11 @@ import android.widget.EditText;
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void viewHighScores(View view) {
+		Intent myIntent = new Intent(FullscreenActivity.this, ViewScoresActivity.class);
+		startActivity(myIntent);
+	}
 
 	private class FindRoom implements RoomRequestListener, ZoneRequestListener {
 
@@ -277,19 +246,14 @@ import android.widget.EditText;
 			theClient.addZoneRequestListener(this);
 			theClient.joinRoomInRange(1, 1, true);
 			Constants.isLocalPlayer = true;
-			
-			System.out.println("IN FINDR");
 		}
 
 		@Override
 		public void onCreateRoomDone(RoomEvent arg0) {
-			// TODO Auto-generated method stub
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				theClient.joinRoom(arg0.getData().getId());
 				Constants.isLocalPlayer = false;
 			}
-			
-			System.out.println("IN ONCREATEROOMDONE");
 		}
 
 		@Override
@@ -336,14 +300,11 @@ import android.widget.EditText;
 
 		@Override
 		public void onJoinRoomDone(RoomEvent arg0) {
-			// TODO Auto-generated method stub
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				theClient.subscribeRoom(arg0.getData().getId());
 			} else {
 				theClient.createTurnRoom("dynamic", "dev", 2, null, 30);
 			}
-			
-			System.out.println("IN ONJOINROOMDONE");
 		}
 
 		@Override
@@ -366,13 +327,10 @@ import android.widget.EditText;
 
 		@Override
 		public void onSubscribeRoomDone(RoomEvent arg0) {
-			// TODO Auto-generated method stub
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				Constants.room_id = arg0.getData().getId();
 				onRoomFound(true);
 			}
-			
-			System.out.println("IN ONSUBSCRIBEROOMDONE");
 		}
 
 		@Override

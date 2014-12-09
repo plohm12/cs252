@@ -27,39 +27,43 @@ public class Gameboard {
 	/**
 	 * Create a new random maze path
 	 */
-	public void makePath(){
+	public void makePath() {
 		System.out.println("Trying to make a new path...");
 		spaces = new ArrayList<Space>();
 		Space current = start;
 		player = start;
 		int count = 0;
-		while(count < PATHSIZE){
+		
+		while(count < PATHSIZE) {
 			spaces.add(current);
 			int x = current.getX();
 			int y = current.getY();
 			System.out.println("At ("+x+", "+y+")");
 			boolean valid[] = {false, false, false, false}; //key=direction, value=valid
 			int numChoices = 0;
+			
 			//Set UP, DOWN, LEFT, RIGHT to true if each is a valid space
-			if( isValidSpace(x, y+1) && !spaces.contains(new Space(x, y+1))){
+			if (isValidSpace(x, y+1) && !spaces.contains(new Space(x, y+1))) {
 				valid[UP] = true;
 				numChoices++;
 			}
-			if( isValidSpace(x, y-1) && !spaces.contains(new Space(x, y-1))){
+			
+			if (isValidSpace(x, y-1) && !spaces.contains(new Space(x, y-1))) {
 				valid[DOWN] = true;
 				numChoices++;
 			}
-			if( isValidSpace(x+1, y) && !spaces.contains(new Space(x+1, y))){
+			
+			if(isValidSpace(x+1, y) && !spaces.contains(new Space(x+1, y))) {
 				valid[RIGHT] = true;
 				numChoices++;
 			}
-			if( isValidSpace(x-1, y) && !spaces.contains(new Space(x-1, y))){
+			
+			if(isValidSpace(x-1, y) && !spaces.contains(new Space(x-1, y))) {
 				valid[LEFT] = true;
 				numChoices++;
 			}
 			
-			
-			if(numChoices < 1){
+			if(numChoices < 1) {
 				// Dead end. Retry.
 				makePath();
 				return;
@@ -67,8 +71,8 @@ public class Gameboard {
 			
 			int[] spaceChoices = new int[numChoices]; //key=negligible, value=direction
 			int n = 0;
-			for(int direction = 0; direction < 4; direction++){
-				if(valid[direction]){
+			for (int direction = 0; direction < 4; direction++) {
+				if (valid[direction]) {
 					spaceChoices[n] = direction;
 					n++;
 				}
@@ -77,7 +81,7 @@ public class Gameboard {
 			// Get a random space from spaceChoices
 			Random random = new Random();
 			int nextSpace = random.nextInt(numChoices);
-			switch(spaceChoices[nextSpace]){
+			switch (spaceChoices[nextSpace]) {
 			case(UP):		current.setNext(new Space(x, y+1));
 							break;
 			case(DOWN):		current.setNext(new Space(x, y-1));
@@ -95,10 +99,9 @@ public class Gameboard {
 			count++;
 		}
 		System.out.println("Finished at ("+finish.getX()+", "+finish.getY()+")");
-		
 	}
 	
-	public boolean isValidSpace(int x, int y){
+	public boolean isValidSpace(int x, int y) {
 		if(x < 0) return false;
 		if(y < 0) return false;
 		if(x >= GRIDSIZE) return false;
@@ -135,28 +138,31 @@ public class Gameboard {
 			y = -1;
 			break;
 		}
+		
 		Space current = start;
-		while(!current.equals(player)){
+		while (!current.equals(player)) {
 			current = current.getNext();
 		}
+		
 		Space temp = new Space(x, y);
-		if( current.getNext().equals(temp))
+		if (current.getNext().equals(temp))
 			player = temp;
 		else
 			player = start;
 		
-		if(player.equals(finish)){
+		if (player.equals(finish)) {
 			//PLAYER HAS WON!!
 			return true;
 		}
+		
 		return false;
 	}
 	
-	public Space getFinish(){
+	public Space getFinish() {
 		return finish;
 	}
 	
-	public Space getPlayer(){
+	public Space getPlayer() {
 		return player;
 	}
 	

@@ -5,12 +5,10 @@ import android.view.SurfaceHolder;
 
 public class GameboardViewThread extends Thread {
     private SurfaceHolder _surfaceHolder;
-    private GameboardView _view;
     private boolean _run = false;
 
     public GameboardViewThread(SurfaceHolder surfaceHolder, GameboardView view) {
         _surfaceHolder = surfaceHolder;
-        _view = view;
     }
 
     public void setRunning(boolean run) { //Allow us to stop the thread
