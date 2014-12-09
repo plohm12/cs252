@@ -26,6 +26,7 @@ import android.support.v4.app.NavUtils;
  */
 public class GameplayActivity extends Activity implements RoomRequestListener{
 	GameboardView gbv;
+	int tries;
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -148,6 +149,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	@Override
 	public void onStart(){
 		super.onStart();
+		tries = 0;
 		gbv = new GameboardView(this, GAME_SIZE, gameboard);
 		gameboardView.addView(gbv);
 		messenger.start();
@@ -350,6 +352,11 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if(winner){
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
+		}
+		tries++;
+		if(tries > 3){
+			//switch player turns
+			tries = 0;
 		}
 	}
 }
