@@ -15,15 +15,16 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.NotifyListener;
 import com.shephertz.app42.gaming.multiplayer.client.listener.TurnBasedRoomListener;
 
 public class GameMessenger implements NotifyListener, TurnBasedRoomListener, ConnectionRequestListener {
+	
 	private GameplayActivity game; 
-	public GameMessenger(GameplayActivity game){
+	
+	public GameMessenger(GameplayActivity game) {
 		this.game = game;
 	}
+	
 	@Override
 	public void onConnectDone(ConnectEvent arg0) {
-		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onConnectDone "+arg0.getResult());        
-
 	}
 
 	@Override
@@ -46,16 +47,12 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 
 	@Override
 	public void onSendMoveDone(byte arg0) {
-		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onSendMoveDone "+arg0);        
-
 	}
 
 	@Override
 	public void onStartGameDone(byte arg0) {
-		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onStartGameDone "+arg0);        
-
 	}
 
 	@Override
@@ -72,7 +69,6 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 
 	@Override
 	public void onGameStarted(String arg0, String arg1, String arg2) {
-		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onGameStarted nextTurn "+arg2); 
         game.onGameStarted(arg2);
 	}
@@ -85,7 +81,6 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 
 	@Override
 	public void onMoveCompleted(MoveEvent arg0) {
-		// TODO Auto-generated method stub
 		Log.d("AppWarpTrace", "onMoveCompleted turn is "+arg0.getNextTurn());   
         game.onMoveCompleted(arg0);      
 	}
@@ -129,9 +124,7 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 
 	@Override
 	public void onUserJoinedRoom(RoomData arg0, String arg1) {
-		// TODO Auto-generated method stub
         Log.d("AppWarpTrace", "onUserJoinedRoom "+arg1);
-
 	}
 
 	@Override
@@ -142,9 +135,7 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 
 	@Override
 	public void onUserLeftRoom(RoomData arg0, String arg1) {
-		// TODO Auto-generated method stub
 		Log.d("AppWarpTrace", "onUserLeftRoom "+arg1);
-       // observer.handleRemoteLeft();
 	}
 
 	@Override
@@ -158,17 +149,20 @@ public class GameMessenger implements NotifyListener, TurnBasedRoomListener, Con
 		// TODO Auto-generated method stub
 		
 	}
-	public void start(){
+	
+	public void start() {
 		FullscreenActivity.theClient.addTurnBasedRoomListener(this);
 		FullscreenActivity.theClient.addNotificationListener(this);
 		FullscreenActivity.theClient.addConnectionRequestListener(this);
 	}
-	public void stop(){
+	
+	public void stop() {
 		FullscreenActivity.theClient.disconnect();
 		FullscreenActivity.theClient.removeConnectionRequestListener(this);
 		FullscreenActivity.theClient.removeNotificationListener(this);
 		FullscreenActivity.theClient.removeTurnBasedRoomListener(this);
 	}
+
 	public void sendMove(String boardState){
 		FullscreenActivity.theClient.sendMove(boardState);
 	}

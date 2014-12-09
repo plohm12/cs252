@@ -47,8 +47,8 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		System.out.println("IN ONDRAW");
 		
 		int GRID_SIZE = ((canvas.getWidth() - ((GRID_WIDTH - 1) * 5)) / GRID_WIDTH) + 1;  // Width and height of a cell
-        for(int i = 0; i < GRID_WIDTH; i++) {
-		    for(int j = 0; j < GRID_HEIGHT; j++) {
+        for (int i = 0; i < GRID_WIDTH; i++) {
+		    for (int j = 0; j < GRID_HEIGHT; j++) {
 		    	int left = i * (GRID_SIZE + 5);
 		    	int top = j * (GRID_SIZE + 5);
 		    	int right = left + GRID_SIZE;
@@ -58,23 +58,19 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 		        Space temp = new Space(j, i);
 		        
 		        // Color the player's square and the finish square
-		        if(gb.getPlayer().equals(temp)){
+		        if (gb.getPlayer().equals(temp)) {
 		        	System.out.println("Player is at "+gb.getPlayer().getX()+", "+gb.getPlayer().getY());
 		        	canvas.drawRect(_squares[j][i], playerP);
-		        }
-		        else if(gb.getFinish().equals(temp)){
+		        } else if (gb.getFinish().equals(temp)) {
 		        	canvas.drawRect(_squares[j][i], finishP);
-		        }
-		        else
+		        } else
 		        	canvas.drawRect(_squares[j][i], paint);
 		    }
-		   
 		}
     }
-	static void updateDraw(int x, int y){
+	static void updateDraw(int x, int y) {
 		System.out.println("update");
 		canvas.drawRect(_squares[1][1], playerP);
-		
 	}
 
 	@Override
@@ -86,11 +82,9 @@ public class GameboardView extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		setWillNotDraw(false); //Allows us to use invalidate() to call onDraw()
-
-
-	     _thread = new GameboardViewThread(getHolder(), this); //Start the thread that
-	     _thread.setRunning(true);                     //will make calls to 
-	     _thread.start();                              //onDraw()
+	    _thread = new GameboardViewThread(getHolder(), this); //Start the thread that
+	    _thread.setRunning(true);                     //will make calls to 
+	    _thread.start();                              //onDraw()
 	}
 
 	@Override
