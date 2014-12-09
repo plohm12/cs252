@@ -244,7 +244,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		UIThreadHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				turnText.setText("Your turn...");
+				turnText.setText("Next Turn "+nt);
 			}
 		});
 	}
@@ -272,9 +272,12 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 				if (evt.getMoveData().length() > 0) {
 					System.out.println("moved completed");
 					turnText.setText("Next Turn " + evt.getNextTurn());
-					if(gameboard.getPlayer().equals(gameboard.getFinish())){
-						System.out.println("You won!");
-						
+					if(evt.getMoveData().equals("1")){
+						System.out.println("You lost!");
+						Constants.isLocalPlayer = isLocalTurn;
+						//GameplayActivity.this.finish();
+						Intent myIntent = new Intent(GameplayActivity.this, LoseActivity.class);
+						startActivity(myIntent);
 					}
 				} else {
 					turnText.setText("Next Turn " + evt.getNextTurn());
@@ -351,6 +354,8 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if (winner) {
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
+			messenger.sendMove("1");
+		//	Constants.isLocalPlayer = isLocalTurn;
 			Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
 			startActivity(myIntent);
 		}

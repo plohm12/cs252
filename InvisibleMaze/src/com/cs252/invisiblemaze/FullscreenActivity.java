@@ -194,6 +194,8 @@ import android.widget.EditText;
 	}
 
 	private void onRoomFound(final boolean success) {
+		System.out.println("roon found done");
+
     	UIThreadHandler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -248,6 +250,7 @@ import android.widget.EditText;
 
 		@Override
 		public void onCreateRoomDone(RoomEvent arg0) {
+			System.out.println("created done");
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				theClient.joinRoom(arg0.getData().getId());
 				Constants.isLocalPlayer = false;
@@ -298,10 +301,11 @@ import android.widget.EditText;
 
 		@Override
 		public void onJoinRoomDone(RoomEvent arg0) {
+			System.out.println("join done");
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				theClient.subscribeRoom(arg0.getData().getId());
 			} else {
-				theClient.createTurnRoom("dynamic", "dev", 2, null, 30);
+				theClient.createTurnRoom("dynamic", "dev", 2, null, 10);
 			}
 		}
 
@@ -325,6 +329,7 @@ import android.widget.EditText;
 
 		@Override
 		public void onSubscribeRoomDone(RoomEvent arg0) {
+			System.out.println("subscribe");
 			if (arg0.getResult() == WarpResponseResultCode.SUCCESS) {
 				Constants.room_id = arg0.getData().getId();
 				onRoomFound(true);
