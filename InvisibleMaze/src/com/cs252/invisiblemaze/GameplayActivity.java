@@ -372,6 +372,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		if(winner){
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
+			System.out.println("You took "+gameboard.getTotalMoves()+", you slowpoke!");
 		}
 		tries++;
 		if(tries >= 3){
