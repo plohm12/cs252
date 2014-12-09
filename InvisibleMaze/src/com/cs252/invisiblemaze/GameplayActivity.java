@@ -344,7 +344,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	
 	public void move(View view) {
 		if (!isLocalTurn) {
-			Toast.makeText(this,"Its not your turn!",Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,"It's not your turn!",Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
