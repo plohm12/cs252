@@ -38,8 +38,6 @@ public class ViewScoresActivity extends ActionBarActivity {
         	Log.d("Name: ", log);
         }
 
-        db.getAllScores();
-
         gridView = (GridView) findViewById(R.id.gridView1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

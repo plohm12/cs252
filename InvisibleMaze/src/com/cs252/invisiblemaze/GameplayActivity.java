@@ -280,9 +280,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener {
 							Constants.isLocalPlayer = isLocalTurn;
 
 							messenger.sendMove("2");
-							FullscreenActivity.theClient.stopGame();
-							//GameplayActivity.this.finish();
-							
+							FullscreenActivity.theClient.stopGame();							
 							Intent myIntent = new Intent(GameplayActivity.this, LoseActivity.class); 
 							startActivity(myIntent);
 						}
@@ -374,13 +372,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener {
 			messenger.sendMove("1");
 
 			Constants.isLocalPlayer = isLocalTurn;
-
-			/*
-			 * Intent myIntent = new Intent(GameplayActivity.this,
-			 * WinActivity.class); myIntent.putExtra("totalMoves",
-			 * gameboard.getTotalMoves()); >>>>>>>
-			 * da82c3d1ef868e968cff6b43bccb8362d7a0b425 startActivity(myIntent);
-			 */
 		}
 
 		tries++;
