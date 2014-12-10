@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
@@ -273,18 +274,26 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 					System.out.println("moved completed");
 					turnText.setText("Next Turn " + evt.getNextTurn());
 					if(evt.getMoveData().equals("1")){
+						if(!evt.getSender().equals(Constants.localUsername)){
 						System.out.println("You lost!");
-						messenger.sendMove("2");
+						Log.d("lost",Constants.localUsername+"Lost!");
 						Constants.isLocalPlayer = isLocalTurn;
+						messenger.sendMove("2");
+						FullscreenActivity.theClient.stopGame();
 						//GameplayActivity.this.finish();
+						/*
 						Intent myIntent = new Intent(GameplayActivity.this, LoseActivity.class);
 						startActivity(myIntent);
+						*/
+						}
 					}
 					else if(evt.getMoveData().equals("2")){
 						Constants.isLocalPlayer = isLocalTurn;
+						Log.d("Win", Constants.localUsername+"Win!");
 						Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
 						myIntent.putExtra("totalMoves", gameboard.getTotalMoves());
 						startActivity(myIntent);
+						
 					}
 				} else {
 					turnText.setText("Next Turn " + evt.getNextTurn());
