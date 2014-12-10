@@ -1,45 +1,58 @@
 package com.cs252.invisiblemaze;
 
-
-
-import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewScoresActivity extends ActionBarActivity {
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost/invisiblemaze";
 	
-	private static final String USER = "root";
-	private static final String PASS = "12345";
+	private GridView gridView;
+    public static ArrayList<String> ArrayofName = new ArrayList<String>();
 	
-	@SuppressLint("NewApi") @Override
+	@SuppressLint("NewApi") 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_scores);
 		MySQLiteHelper db = new MySQLiteHelper(this);
-		System.out.println(db.getDatabaseName());
-		db.addScore(new Score("Charles",30));
-		db.addScore(new Score("Charles",50));
-		db.addScore(new Score("Charles",40));
-		db.addScore(new Score("Charles",20));
-		db.addScore(new Score("Charles",60));
-		db.addScore(new Score("Charles",40));
-
-		List<Score> list = db.getAllScores();
 		
-		System.out.println(db.getAllScores());
-		//db.getScore(0);
-		int i = 1;
-		while(i<5){
-		db.getScore(i);
-		i++;
-		}
+		Log.d("Reading: ", "Reading all scores..");
+        List<Score> scores = db.getAllScores();       
+
+        for (Score score : scores) {
+            String log = "ID: " + score.getId() + ", Name: " + score.getName() + ", Score: " + score.getScore();
+          	// Writing Contacts to log
+        	Log.d("Name: ", log);
+        }
+
+        db.getAllScores();
+
+        gridView = (GridView) findViewById(R.id.gridView1);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, ArrayofName);
+
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new OnItemClickListener() {
+        	@Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+               Toast.makeText(getApplicationContext(), ((TextView) arg1).getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
 	}
 
 	@Override

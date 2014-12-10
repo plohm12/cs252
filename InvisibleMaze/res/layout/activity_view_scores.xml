@@ -13,32 +13,19 @@
         android:layout_height="wrap_content"
         android:text="@string/high_scores" />
     
-    <TableLayout
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:layout_marginTop="30dp"
-    	android:stretchColumns="1">
+	<LinearLayout
+    	android:orientation="vertical" 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent" >
     	
-    <TableRow>
-        <TextView
-            android:text="@string/name"
-            android:padding="3dip" />
-        <TextView
-            android:text="@string/score"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="@string/name"
-            android:padding="3dip" />
-        <TextView
-            android:text="@string/score"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-    
-</TableLayout>
+    	<GridView 
+    	    android:layout_height="wrap_content"
+    	    android:layout_width="match_parent"
+    	    android:id="@+id/gridView1"
+        	android:layout_marginTop="20dp"
+        	android:numColumns="1" >
+    	</GridView>
+    	
+	</LinearLayout>
 
 </RelativeLayout>

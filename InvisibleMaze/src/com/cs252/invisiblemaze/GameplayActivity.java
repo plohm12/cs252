@@ -156,7 +156,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 
 		if (Constants.isLocalPlayer) {
 			isLocalTurn = true;
-			turnText.setText("Next Turn " + Constants.localUsername);
+			turnText.setText("Next Turn: " + Constants.localUsername);
 		}
 	}
 	
@@ -244,7 +244,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 		UIThreadHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				turnText.setText("Next Turn "+nt);
+				turnText.setText("Next Turn: " + nt);
 			}
 		});
 	}
@@ -271,16 +271,15 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			public void run() {
 				if (evt.getMoveData().length() > 0) {
 					System.out.println("moved completed");
-					turnText.setText("Next Turn " + evt.getNextTurn());
-					if(evt.getMoveData().equals("1")){
+					turnText.setText("Next Turn: " + evt.getNextTurn());
+					if (evt.getMoveData().equals("1") && !evt.getSender().equals(Constants.localUsername)) {
 						System.out.println("You lost!");
 						Constants.isLocalPlayer = isLocalTurn;
-						//GameplayActivity.this.finish();
 						Intent myIntent = new Intent(GameplayActivity.this, LoseActivity.class);
 						startActivity(myIntent);
 					}
 				} else {
-					turnText.setText("Next Turn " + evt.getNextTurn());
+					turnText.setText("Next Turn: " + evt.getNextTurn());
 				}
 			}
 		});
@@ -344,7 +343,7 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 	
 	public void move(View view) {
 		if (!isLocalTurn) {
-			Toast.makeText(this,"Its not your turn!",Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,"It's not your turn!", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -355,7 +354,6 @@ public class GameplayActivity extends Activity implements RoomRequestListener{
 			//do winner stuff
 			System.out.println("YOU HAVE WON!!!");
 			messenger.sendMove("1");
-		//	Constants.isLocalPlayer = isLocalTurn;
 			Intent myIntent = new Intent(GameplayActivity.this, WinActivity.class);
 			startActivity(myIntent);
 		}

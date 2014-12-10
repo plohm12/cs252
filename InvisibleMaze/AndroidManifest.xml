@@ -65,6 +65,7 @@
  			android:parentActivityName=".FullscreenActivity"
             android:screenOrientation="portrait" >
         </activity>
+        
     </application>
 
 </manifest>
