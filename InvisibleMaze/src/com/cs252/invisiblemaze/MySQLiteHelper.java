@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
-	private static final int VER = 3;
+	private static final int VER = 4;
 	private static final String DB_NAME = "ScoreDB";
 	private static final String TABLE = "scores";
 	private static final String ID = "id";

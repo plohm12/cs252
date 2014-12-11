@@ -151,6 +151,8 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 
 	private int users;
 
+	private Handler UIThreadHandler;
+
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
@@ -162,24 +164,29 @@ public class SearchActivity extends Activity implements RoomRequestListener {
 	
 	public void init() {
 		FullscreenActivity.theClient.addRoomRequestListener(this);
+		
+		new Thread(new Runnable(){
 
-		while (users < 3) {
-			FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
-		
-			if (users > 1) {
-				//FullscreenActivity.theClient.startGame();
-				Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
-				startActivity(myIntent);
-				break;
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				System.out.println(users);
+				while (users < 3) {
+					FullscreenActivity.theClient.getLiveRoomInfo(Constants.room_id);
+				
+					if (users > 1) {
+						//FullscreenActivity.theClient.startGame();
+						Intent myIntent = new Intent(SearchActivity.this, GameplayActivity.class);
+						startActivity(myIntent);
+						break;
+					}
+				}
+				
 			}
-		
-			if (Constants.isLocalPlayer){
-				//FullscreenActivity.theClient.sendChat("I JOINED!");
-			} else if (!Constants.isLocalPlayer){
-			//	FullscreenActivity.theClient.sendChat(Constants.localUsername);
-			}
+			
+			}).start();
+
 	
-		}
 	}
 	
 	@Override
